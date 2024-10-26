@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -47,9 +49,17 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+
 }
 
+kapt {
+    correctErrorTypes = true
+}
+val room_version = "2.6.1"
+val paging_version = "3.3.2"
 dependencies {
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -66,4 +76,54 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.3")
+
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    //coil for images
+    implementation("io.coil-kt:coil-compose:2.0.0")
+
+    //google icons
+    implementation("androidx.compose.material:material-icons-extended-android:1.7.2")
+
+    //Room
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
+    //  - Paging 3 Integration
+    implementation("androidx.paging:paging-runtime:$paging_version")
+    implementation("androidx.room:room-paging:$room_version")
+    implementation("androidx.paging:paging-compose:3.3.2")
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    //o
+
+    /*  //rating bar
+      implementation("com.github.SmartToolFactory:Compose-RatingBar:1.1.1")
+      implementation("com.github.SmartToolFactory:Compose-RatingBar:1.0.0")
+      implementation("com.github.a914-gowtham:compose-ratingbar:1.3.12")
+
+      //Animation
+      implementation("com.airbnb.android:lottie-compose:6.0.0")
+      implementation("com.github.stevdza-san:OneTapCompose:1.0.14")
+  */
+
+
 }

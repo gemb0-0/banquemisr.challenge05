@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05
+package com.example.banquemisrchallenge05.view
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BarChart
