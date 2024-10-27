@@ -6,15 +6,13 @@ import javax.inject.Inject
 
 class RemoteDSImpl @Inject constructor(private  val api: ApiService) : RemoteDS {
     override suspend fun getPopularMovies() {
-
-        Log.i("MovieViewModel", "getPopularMovies: remoteds + ${api.getPopularMovies()}")
-
-        var res =  api.getPopularMovies()
-        if (res.isSuccessful){
-            res.body()?.let {
-                println("ggggggggggggggggggggg"+it)
-            }
-        }
-
+//        var res =  api.getPopularMovies()
+//        if (res.isSuccessful){
+//            res.body()?.let {
+//                println("ggggggggggggggggggggg"+it)
+//            }
+//        }
     }
+
+
 }
