@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.example.banquemisrchallenge05.model.Movie
 import com.example.banquemisrchallenge05.model.MovieResponse
 
 @Dao

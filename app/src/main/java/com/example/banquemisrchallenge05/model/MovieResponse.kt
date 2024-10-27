@@ -1,25 +1,30 @@
 package com.example.banquemisrchallenge05.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class MovieResponse(
+    @PrimaryKey
     val page: Int,
     val results: List<Movie>,
-    val totalPages: Int,
-    val totalResults: Int
+    val total_pages: Int,
+    val total_results: Int
 )
 
 data class Movie(
     val adult: Boolean,
-    val backdropPath: String?,
-    val genreIds: List<Int>,
+    val backdrop_path: String,
+    val genre_ids: List<Int>,
     val id: Int,
-    val originalLanguage: String,
-    val originalTitle: String,
+    val original_language: String,
+    val original_title: String,
     val overview: String,
     val popularity: Double,
-    val posterPath: String?,
-    val releaseDate: String,
+    val poster_path: String,
+    val release_date: String,
     val title: String,
     val video: Boolean,
-    val voteAverage: Double,
-    val voteCount: Int
+    val vote_average: Double,
+    val vote_count: Int
 )

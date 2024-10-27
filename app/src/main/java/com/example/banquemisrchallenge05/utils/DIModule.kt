@@ -8,11 +8,8 @@ import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.example.banquemisrchallenge05.data.localDS.MovieDataBase
 import com.example.banquemisrchallenge05.data.network.ApiService
-import com.example.banquemisrchallenge05.data.remoteDS.RemoteDSImpl
 import com.example.banquemisrchallenge05.data.repository.NowPlayingMovieMediator
 import com.example.banquemisrchallenge05.data.repository.PopularMovieMediator
-import com.example.banquemisrchallenge05.data.repository.Repository
-import com.example.banquemisrchallenge05.data.repository.RepositoryImpl
 import com.example.banquemisrchallenge05.data.repository.UpComingMovieMediator
 import com.example.banquemisrchallenge05.model.MovieResponse
 import dagger.Module
@@ -29,13 +26,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object Module {
-
-    @Provides
-    @Singleton
-    fun ProvideRepository(): Repository {
-        return RepositoryImpl(RemoteDSImpl(ProvideApiService()))
-    }
-
 
     @Provides
     @Singleton
@@ -74,7 +64,7 @@ object Module {
     @Named("Popular")
     fun provideMoviePager(@Named("popular") movieDB: MovieDataBase, movieAPI: ApiService): Pager<Int, MovieResponse> {
         return Pager(
-            config = PagingConfig(pageSize = 20),
+            config = PagingConfig(pageSize = 5),
             remoteMediator = PopularMovieMediator(
                 movieDB = movieDB,
                 movieAPI = movieAPI

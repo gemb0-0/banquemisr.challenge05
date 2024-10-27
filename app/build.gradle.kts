@@ -93,7 +93,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     //coil for images
-    implementation("io.coil-kt:coil-compose:2.0.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     //google icons
     implementation("androidx.compose.material:material-icons-extended-android:1.7.2")
@@ -104,9 +104,9 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
 
     //  - Paging 3 Integration
-    implementation("androidx.paging:paging-runtime:$paging_version")
+    implementation ("androidx.paging:paging-runtime-ktx:3.1.1")
+    implementation( "androidx.paging:paging-compose:1.0.0-alpha18")
     implementation("androidx.room:room-paging:$room_version")
-    implementation("androidx.paging:paging-compose:3.3.2")
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
