@@ -17,10 +17,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.navigationBarsIgnoringVisibility
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -41,6 +39,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -56,15 +55,14 @@ import coil.compose.AsyncImage
 import com.example.banquemisrchallenge05.R
 import com.example.banquemisrchallenge05.data.network.ApiState
 import com.example.banquemisrchallenge05.model.MovieDetailsResponse
+import com.example.banquemisrchallenge05.ui.theme.TransparentRed
 import com.example.banquemisrchallenge05.utils.Constants
 import com.example.banquemisrchallenge05.viewModel.MovieDetailsViewModel
+import com.smarttoolfactory.ratingbar.RatingBar
+import com.smarttoolfactory.ratingbar.model.Shimmer
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-import androidx.compose.ui.graphics.Color
-import com.example.banquemisrchallenge05.ui.theme.TransparentRed
-import com.smarttoolfactory.ratingbar.RatingBar
-import com.smarttoolfactory.ratingbar.model.Shimmer
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
@@ -174,7 +172,7 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                 text = "Overview",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(start = 10.dp, top = 0.dp)
+                modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)
             )
             Text(
                 text = movieData.overview,
@@ -185,7 +183,7 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                 text = "Additional Info",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(start = 10.dp, top = 5.dp)
+                modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
             )
 
             Text(
@@ -231,7 +229,7 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                                 fontStyle = FontStyle.Italic
                             )
                         ) {
-                            append("${"%,d".format(movieData.budget)}$")
+                            append(if(movieData.budget>0)"${"%,d".format(movieData.budget)}$" else "Unavailable Info")
                         }
                     },
                 )
@@ -252,7 +250,7 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                                 fontStyle = FontStyle.Italic
                             )
                         ) {
-                            append("${"%,d".format(movieData.revenue)}$")
+                            append(if(movieData.revenue>0)"${"%,d".format(movieData.revenue)}$" else "Unavailable Info")
                         }
                     },
                 )
@@ -266,11 +264,12 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                 modifier = Modifier.padding(start = 10.dp, top = 5.dp)
             )
 
-            Row(modifier = Modifier
-                .fillMaxSize()
-                .horizontalScroll(rememberScrollState())) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .horizontalScroll(rememberScrollState())
+            ) {
                 movieData.production_companies.forEach {
-
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(start = 10.dp, top = 5.dp)

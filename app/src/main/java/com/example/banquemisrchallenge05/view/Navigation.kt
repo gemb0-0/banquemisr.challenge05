@@ -21,9 +21,9 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
 @Composable
 fun NavigationHost(navController: NavHostController){
     NavHost(navController = navController, startDestination = BottomNavItem.nowPlaying.route){
-    composable("nowPlaying"){ NowPlaying() }
+    composable("nowPlaying"){ NowPlaying(navController) }
     composable("popular"){ Popular(navController) }
-    composable("upComing"){ UpComing() }
+    composable("upComing"){ UpComing(navController) }
    composable("movieDetails/{id}") {
         val id = it.arguments?.getString("id")
         MovieDetailsScreen(id!!, navController)
