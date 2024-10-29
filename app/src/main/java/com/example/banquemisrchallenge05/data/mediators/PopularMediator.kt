@@ -1,5 +1,4 @@
-package com.example.banquemisrchallenge05.data.repository
-
+package com.example.banquemisrchallenge05.data.mediators
 
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
@@ -11,10 +10,9 @@ import com.example.banquemisrchallenge05.data.network.ApiService
 import com.example.banquemisrchallenge05.model.MovieResponse
 
 @OptIn(ExperimentalPagingApi::class)
-class UpComingMediator(
+class PopularMediator(
     private val movieDB: MovieDataBase,
     private val movieAPI: ApiService
-
 ) : RemoteMediator<Int, MovieResponse>() {
     override suspend fun load(
         loadType: LoadType,
@@ -31,10 +29,10 @@ class UpComingMediator(
                 }
             }
 
-            val response = movieAPI.getUpcomingMovies(loadKey)
+            val response = movieAPI.getPopularMovies(loadKey)
             if (response.isSuccessful) {
+                Log.i("MovieMediator", "Response: ${response.body()}")
                 response.body()?.let {
-                    Log.i("MovieMediator", "Response: ${it.results}")
                     val movieResponse = MovieResponse(page = it.page, results = it.results,
                         total_pages = it.total_pages, total_results = it.total_results)
                     movieDB.movieDAO.insertMovie(movieResponse)

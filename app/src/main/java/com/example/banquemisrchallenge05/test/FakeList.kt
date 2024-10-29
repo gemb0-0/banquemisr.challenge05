@@ -8,7 +8,6 @@ import com.example.banquemisrchallenge05.model.ProductionCompany
 import com.example.banquemisrchallenge05.model.ProductionCountry
 import com.example.banquemisrchallenge05.model.SpokenLanguage
 
-/*
 val now_playing = listOf(
     MovieResponse(
         page = 1,
@@ -88,7 +87,6 @@ val upcoming = listOf(
 )
 
 
-*/
 
 val movieDetailsResponse = mutableListOf( MovieDetailsResponse(
     adult = false,

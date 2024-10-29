@@ -10,11 +10,11 @@ import com.example.banquemisrchallenge05.data.localDS.MovieDataBase
 import com.example.banquemisrchallenge05.data.network.ApiService
 import com.example.banquemisrchallenge05.data.remoteDS.RemoteDS
 import com.example.banquemisrchallenge05.data.remoteDS.RemoteDSImpl
-import com.example.banquemisrchallenge05.data.repository.NowPlayingMovieMediator
-import com.example.banquemisrchallenge05.data.repository.PopularMediator
+import com.example.banquemisrchallenge05.data.mediators.NowPlayingMovieMediator
+import com.example.banquemisrchallenge05.data.mediators.PopularMediator
 import com.example.banquemisrchallenge05.data.repository.Repository
 import com.example.banquemisrchallenge05.data.repository.RepositoryImpl
-import com.example.banquemisrchallenge05.data.repository.UpComingMediator
+import com.example.banquemisrchallenge05.data.mediators.UpComingMediator
 import com.example.banquemisrchallenge05.model.MovieResponse
 import dagger.Module
 import dagger.Provides

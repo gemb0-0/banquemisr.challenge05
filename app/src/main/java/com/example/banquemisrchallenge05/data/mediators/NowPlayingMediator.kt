@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05.data.repository
+package com.example.banquemisrchallenge05.data.mediators
 
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi

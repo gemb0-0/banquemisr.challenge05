@@ -17,7 +17,6 @@ class RemoteDSImpl @Inject constructor( val api: ApiService) : RemoteDS {
             }
         }
         else{
-            Log.e("RemoteDSImpl", "getMovieDetails: ${response.errorBody()}")
             throw Exception("Failed to fetch movie details")
         }
 

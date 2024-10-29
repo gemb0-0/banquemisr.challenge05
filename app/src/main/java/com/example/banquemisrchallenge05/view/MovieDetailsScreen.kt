@@ -28,6 +28,8 @@ import androidx.compose.material.icons.filled.StarOutline
 import androidx.compose.material.icons.filled.StarRate
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -56,6 +58,7 @@ import com.example.banquemisrchallenge05.R
 import com.example.banquemisrchallenge05.data.network.ApiState
 import com.example.banquemisrchallenge05.model.MovieDetailsResponse
 import com.example.banquemisrchallenge05.ui.theme.TransparentRed
+import com.example.banquemisrchallenge05.ui.theme.grey
 import com.example.banquemisrchallenge05.utils.Constants
 import com.example.banquemisrchallenge05.viewModel.MovieDetailsViewModel
 import com.smarttoolfactory.ratingbar.RatingBar
@@ -97,8 +100,6 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-            //  verticalArrangement = Arrangement.Center,
-            // horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box {
                 AsyncImage(
@@ -168,6 +169,27 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                 )
             }
 
+            Text("Genres:",
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(start = 10.dp, top = 5.dp)
+            )
+
+
+               Row(modifier = Modifier.padding(start = 7.dp, end = 7.dp)) {
+                     movieData.genres.forEach {
+                         Card (modifier = Modifier.padding(horizontal = 5.dp),
+                             colors = CardDefaults.cardColors(grey)
+                             ) {
+                             Text(
+                                 text = it.name,
+                                 fontSize = 14.sp,
+                                    modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 2.dp, bottom = 2.dp)
+                             )
+                         }
+                     }
+               }
+
             Text(
                 text = "Overview",
                 fontSize = 25.sp,
@@ -193,17 +215,6 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                     }
                     withStyle(style = SpanStyle(fontSize = 16.sp, fontStyle = FontStyle.Italic)) {
                         append("${movieData.runtime} minutes")
-                    }
-                },
-                modifier = Modifier.padding(start = 10.dp, top = 5.dp)
-            )
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(style = SpanStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)) {
-                        append("genres: ")
-                    }
-                    withStyle(style = SpanStyle(fontSize = 16.sp, fontStyle = FontStyle.Italic)) {
-                        append(movieData.genres.joinToString { it.name })
                     }
                 },
                 modifier = Modifier.padding(start = 10.dp, top = 5.dp)

@@ -7,6 +7,7 @@ import com.example.banquemisrchallenge05.data.network.ApiState
 import com.example.banquemisrchallenge05.data.repository.Repository
 import com.example.banquemisrchallenge05.model.MovieDetailsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -19,12 +20,11 @@ class MovieDetailsViewModel @Inject constructor(private val repo: Repository) : 
     private val _movieDetails = MutableStateFlow<ApiState>(ApiState.Loading)
     val movieDetails: StateFlow<ApiState> = _movieDetails
     fun getMovieDetails(id: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repo.getMovieDetails(id).catch {
                 _movieDetails.value = ApiState.Failure(it.message?:"Unknown Error")
             }.collect {
                 _movieDetails.value = ApiState.Success(it)
-                Log.i("MovieDetailsViewModel", "getMovieDetails: $it")
             }
 
         }

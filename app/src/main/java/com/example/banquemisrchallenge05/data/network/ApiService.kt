@@ -9,7 +9,6 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-
     @GET("popular?")
     suspend fun getPopularMovies(
         @Query("page") page: Int,

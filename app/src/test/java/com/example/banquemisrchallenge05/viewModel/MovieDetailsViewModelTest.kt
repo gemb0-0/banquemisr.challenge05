@@ -2,11 +2,6 @@ package com.example.banquemisrchallenge05.viewModel
 
 import com.example.banquemisrchallenge05.data.network.ApiState
 import com.example.banquemisrchallenge05.data.repository.FakeRepositoryImpl
-import com.example.banquemisrchallenge05.model.Genre
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
-import com.example.banquemisrchallenge05.model.ProductionCompany
-import com.example.banquemisrchallenge05.model.ProductionCountry
-import com.example.banquemisrchallenge05.model.SpokenLanguage
 import com.example.banquemisrchallenge05.test.movieDetailsResponse
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
