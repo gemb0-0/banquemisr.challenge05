@@ -116,11 +116,17 @@ dependencies {
     //rating bar
     implementation("com.github.SmartToolFactory:Compose-RatingBar:1.1.1")
 
- /*
-      //Animation
-      implementation("com.airbnb.android:lottie-compose:6.0.0")
-      implementation("com.github.stevdza-san:OneTapCompose:1.0.14")
-  */
+    //test
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+    androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.7.4")
+
+
+    /*
+         //Animation
+         implementation("com.airbnb.android:lottie-compose:6.0.0")
+         implementation("com.github.stevdza-san:OneTapCompose:1.0.14")
+     */
 
 
 }
