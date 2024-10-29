@@ -113,13 +113,10 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    //o
+    //rating bar
+    implementation("com.github.SmartToolFactory:Compose-RatingBar:1.1.1")
 
-    /*  //rating bar
-      implementation("com.github.SmartToolFactory:Compose-RatingBar:1.1.1")
-      implementation("com.github.SmartToolFactory:Compose-RatingBar:1.0.0")
-      implementation("com.github.a914-gowtham:compose-ratingbar:1.3.12")
-
+ /*
       //Animation
       implementation("com.airbnb.android:lottie-compose:6.0.0")
       implementation("com.github.stevdza-san:OneTapCompose:1.0.14")

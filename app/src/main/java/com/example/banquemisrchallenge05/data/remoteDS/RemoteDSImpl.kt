@@ -1,18 +1,26 @@
 package com.example.banquemisrchallenge05.data.remoteDS
 
+
 import android.util.Log
 import com.example.banquemisrchallenge05.data.network.ApiService
+import com.example.banquemisrchallenge05.model.MovieDetailsResponse
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RemoteDSImpl @Inject constructor(private  val api: ApiService) : RemoteDS {
-    override suspend fun getPopularMovies() {
-//        var res =  api.getPopularMovies()
-//        if (res.isSuccessful){
-//            res.body()?.let {
-//                println("ggggggggggggggggggggg"+it)
-//            }
-//        }
-    }
+class RemoteDSImpl @Inject constructor( val api: ApiService) : RemoteDS {
+    override fun getMovieDetails(id: String): Flow<MovieDetailsResponse> = flow {
+       val response =  api.getMovieDetails(id)
+        if (response.isSuccessful && response.body() != null){
+            response.body()?.let {
+                emit(it)
+            }
+        }
+        else{
+            Log.e("RemoteDSImpl", "getMovieDetails: ${response.errorBody()}")
+            throw Exception("Failed to fetch movie details")
+        }
 
+    }
 
 }

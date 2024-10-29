@@ -5,19 +5,22 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.cachedIn
 import androidx.paging.flatMap
-import androidx.paging.map
+import com.example.banquemisrchallenge05.data.repository.Repository
+import com.example.banquemisrchallenge05.data.repository.RepositoryImpl
+import com.example.banquemisrchallenge05.model.MovieDetailsResponse
 import com.example.banquemisrchallenge05.model.MovieResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(
+class MoviesViewModel @Inject constructor(
     @Named("Popular") popular_pager: Pager<Int, MovieResponse>,
     @Named("Upcoming") upcoming_pager: Pager<Int, MovieResponse>,
-    @Named("NowPlaying") nowPlaying_pager: Pager<Int, MovieResponse>
+    @Named("NowPlaying") nowPlaying_pager: Pager<Int, MovieResponse>,
 ) : ViewModel() {
 
     val popularPager = popular_pager.flow.map { pagingData ->

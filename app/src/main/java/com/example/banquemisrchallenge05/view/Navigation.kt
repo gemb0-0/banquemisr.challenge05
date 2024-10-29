@@ -22,7 +22,11 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
 fun NavigationHost(navController: NavHostController){
     NavHost(navController = navController, startDestination = BottomNavItem.nowPlaying.route){
     composable("nowPlaying"){ NowPlaying() }
-    composable("popular"){ Popular() }
+    composable("popular"){ Popular(navController) }
     composable("upComing"){ UpComing() }
+   composable("movieDetails/{id}") {
+        val id = it.arguments?.getString("id")
+        MovieDetailsScreen(id!!, navController)
+   }
     }
 }
