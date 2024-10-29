@@ -2,7 +2,6 @@ package com.example.banquemisrchallenge05.utils
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -16,9 +15,7 @@ import com.example.banquemisrchallenge05.data.repository.PopularMediator
 import com.example.banquemisrchallenge05.data.repository.Repository
 import com.example.banquemisrchallenge05.data.repository.RepositoryImpl
 import com.example.banquemisrchallenge05.data.repository.UpComingMediator
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
 import com.example.banquemisrchallenge05.model.MovieResponse
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -180,8 +177,6 @@ object Module {
             .create(ApiService::class.java)
     }
 
-
-
     @Provides
     @Singleton
     fun provideRemoteDS( @Named("ApiServiceWithCache") apiService: ApiService): RemoteDS {
@@ -193,33 +188,4 @@ object Module {
     fun provideRepository(remoteDS: RemoteDS): Repository {
         return RepositoryImpl(remoteDS)
     }
-
-   /* @Provides
-    @Singleton
-    fun provideMovieDataBase(@ApplicationContext context: Context): MovieDetailsDataBase {
-        return Room.databaseBuilder(
-            context,
-            MovieDetailsDataBase::class.java,
-            "movie.db"
-        ).build()
-    }
-
-    @OptIn(ExperimentalPagingApi::class)
-    @Provides
-    @Singleton
-
-    fun provideMovieDetailsPager(movieDB: MovieDetailsDataBase, movieAPI: ApiService): Pager<Int, MovieDetailsResponse> {
-        return Pager(
-            config = PagingConfig(pageSize = 20),
-            remoteMediator = MovieDetailsMediator(
-                movieDB = movieDB,
-                movieAPI = movieAPI
-            ),
-            pagingSourceFactory = {
-                movieDB.movieDAO.pagingSource()
-            }
-        )
-    }
-
-*/
 }
