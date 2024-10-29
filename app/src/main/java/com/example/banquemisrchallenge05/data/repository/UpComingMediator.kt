@@ -1,5 +1,6 @@
 package com.example.banquemisrchallenge05.data.repository
 
+
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -10,9 +11,10 @@ import com.example.banquemisrchallenge05.data.network.ApiService
 import com.example.banquemisrchallenge05.model.MovieResponse
 
 @OptIn(ExperimentalPagingApi::class)
-class PopularMovieMediator(
+class UpComingMediator(
     private val movieDB: MovieDataBase,
     private val movieAPI: ApiService
+
 ) : RemoteMediator<Int, MovieResponse>() {
     override suspend fun load(
         loadType: LoadType,
@@ -25,18 +27,18 @@ class PopularMovieMediator(
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
                         ?: return MediatorResult.Success(endOfPaginationReached = true)
-                    (state.pages.lastOrNull()?.nextKey ?: lastItem.page) + 1
+                    lastItem.page + 1
                 }
             }
 
-            val response = movieAPI.getPopularMovies(loadKey)
+            val response = movieAPI.getUpcomingMovies(loadKey)
             if (response.isSuccessful) {
                 response.body()?.let {
+                    Log.i("MovieMediator", "Response: ${it.results}")
                     val movieResponse = MovieResponse(page = it.page, results = it.results,
-                        totalPages = it.totalPages, totalResults = it.totalResults)
-                    Log.i("MovieMediator", "MovieResponse: $movieResponse")
+                        total_pages = it.total_pages, total_results = it.total_results)
                     movieDB.movieDAO.insertMovie(movieResponse)
-                    MediatorResult.Success(endOfPaginationReached = it.page == it.totalPages)
+                    MediatorResult.Success(endOfPaginationReached = it.page == it.total_pages)
                 } ?: MediatorResult.Error(Exception("Response body is null"))
             } else {
                 MediatorResult.Error(Exception("Response is not successful"))

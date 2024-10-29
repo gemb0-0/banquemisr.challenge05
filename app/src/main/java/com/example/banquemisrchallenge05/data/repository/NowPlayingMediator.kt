@@ -33,9 +33,9 @@ class NowPlayingMovieMediator(
             if (response.isSuccessful) {
                 response.body()?.let {
                     val movieResponse = MovieResponse(page = it.page, results = it.results,
-                        totalPages = it.totalPages, totalResults = it.totalResults)
+                        total_pages = it.total_pages, total_results = it.total_results)
                     movieDB.movieDAO.insertMovie(movieResponse)
-                    MediatorResult.Success(endOfPaginationReached = it.page == it.totalPages)
+                    MediatorResult.Success(endOfPaginationReached = it.page == it.total_pages)
                 } ?: MediatorResult.Error(Exception("Response body is null"))
             } else {
                 MediatorResult.Error(Exception("Response is not successful"))
