@@ -52,7 +52,6 @@ fun MainScreen(networkObserver: NetworkObserver) {
     val currentRoute = navBackStackEntry?.destination?.route
     var showBottomBar by rememberSaveable { mutableStateOf(true) }
 
-    val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
 
