@@ -1,6 +1,6 @@
 package com.example.banquemisrchallenge05.data.repository
 
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
+import com.example.banquemisrchallenge05.data.model.MovieDetailsResponse
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {

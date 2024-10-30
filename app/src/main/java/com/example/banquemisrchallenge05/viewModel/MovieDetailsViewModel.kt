@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.banquemisrchallenge05.data.network.ApiState
 import com.example.banquemisrchallenge05.data.repository.Repository
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
+import com.example.banquemisrchallenge05.data.model.MovieDetailsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

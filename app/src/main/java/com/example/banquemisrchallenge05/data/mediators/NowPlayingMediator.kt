@@ -7,7 +7,7 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.banquemisrchallenge05.data.localDS.MovieDataBase
 import com.example.banquemisrchallenge05.data.network.ApiService
-import com.example.banquemisrchallenge05.model.MovieResponse
+import com.example.banquemisrchallenge05.data.model.MovieResponse
 
 @OptIn(ExperimentalPagingApi::class)
 class NowPlayingMovieMediator(

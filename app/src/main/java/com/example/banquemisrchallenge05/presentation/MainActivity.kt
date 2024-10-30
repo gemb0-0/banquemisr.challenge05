@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05.view
+package com.example.banquemisrchallenge05.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

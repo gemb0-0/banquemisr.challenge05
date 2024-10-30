@@ -3,7 +3,7 @@ package com.example.banquemisrchallenge05.data.remoteDS
 
 import android.util.Log
 import com.example.banquemisrchallenge05.data.network.ApiService
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
+import com.example.banquemisrchallenge05.data.model.MovieDetailsResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

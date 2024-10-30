@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05.view
+package com.example.banquemisrchallenge05.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.LinearEasing
@@ -56,7 +56,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.banquemisrchallenge05.R
 import com.example.banquemisrchallenge05.data.network.ApiState
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
+import com.example.banquemisrchallenge05.data.model.MovieDetailsResponse
 import com.example.banquemisrchallenge05.ui.theme.TransparentRed
 import com.example.banquemisrchallenge05.ui.theme.grey
 import com.example.banquemisrchallenge05.utils.Constants

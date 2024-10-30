@@ -1,11 +1,11 @@
-package com.example.banquemisrchallenge05.model
+package com.example.banquemisrchallenge05.data.model
 
 data class MovieDetailsResponse(
     val adult: Boolean,
     val backdrop_path: String,
     val belongs_to_collection: Any,
     val budget: Int,
-   val genres: List<Genre>,
+    val genres: List<Genre>,
     val homepage: String,
     val id: Int,
     val imdb_id: String,

@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05
+package com.example.banquemisrchallenge05.utils
 
 import android.app.Application
 import coil.ImageLoader
@@ -7,6 +7,7 @@ import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
+import com.example.banquemisrchallenge05.R
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05.view
+package com.example.banquemisrchallenge05.presentation
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -29,7 +29,7 @@ import androidx.compose.ui.util.lerp
 import androidx.navigation.NavHostController
 import androidx.paging.compose.LazyPagingItems
 import coil.compose.AsyncImage
-import com.example.banquemisrchallenge05.model.Movie
+import com.example.banquemisrchallenge05.data.model.Movie
 import com.example.banquemisrchallenge05.utils.Constants
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

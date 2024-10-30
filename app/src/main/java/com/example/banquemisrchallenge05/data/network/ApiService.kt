@@ -1,7 +1,7 @@
 package com.example.banquemisrchallenge05.data.network
 
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
-import com.example.banquemisrchallenge05.model.MovieResponse
+import com.example.banquemisrchallenge05.data.model.MovieDetailsResponse
+import com.example.banquemisrchallenge05.data.model.MovieResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

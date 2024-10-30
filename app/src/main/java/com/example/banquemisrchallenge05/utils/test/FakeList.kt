@@ -1,12 +1,12 @@
 package com.example.banquemisrchallenge05.utils.test
 
-import com.example.banquemisrchallenge05.model.Genre
-import com.example.banquemisrchallenge05.model.Movie
-import com.example.banquemisrchallenge05.model.MovieDetailsResponse
-import com.example.banquemisrchallenge05.model.MovieResponse
-import com.example.banquemisrchallenge05.model.ProductionCompany
-import com.example.banquemisrchallenge05.model.ProductionCountry
-import com.example.banquemisrchallenge05.model.SpokenLanguage
+import com.example.banquemisrchallenge05.data.model.Genre
+import com.example.banquemisrchallenge05.data.model.Movie
+import com.example.banquemisrchallenge05.data.model.MovieDetailsResponse
+import com.example.banquemisrchallenge05.data.model.MovieResponse
+import com.example.banquemisrchallenge05.data.model.ProductionCompany
+import com.example.banquemisrchallenge05.data.model.ProductionCountry
+import com.example.banquemisrchallenge05.data.model.SpokenLanguage
 
 val now_playing = listOf(
     MovieResponse(
