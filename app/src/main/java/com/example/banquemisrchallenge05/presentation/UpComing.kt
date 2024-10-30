@@ -9,16 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.banquemisrchallenge05.viewModel.MoviesViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun UpComing(navController: NavHostController) {
-    val viewModel = hiltViewModel<MoviesViewModel>()
-    val upComingMovies = viewModel.upcomingPager.collectAsLazyPagingItems()
+fun UpComing(navController: NavHostController, movieViewModel: MoviesViewModel) {
+    val upComingMovies = movieViewModel.upcomingPager.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
             Text(

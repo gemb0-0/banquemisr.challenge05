@@ -51,8 +51,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.banquemisrchallenge05.R
 import com.example.banquemisrchallenge05.data.network.ApiState
@@ -69,23 +68,29 @@ import java.util.Locale
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun MovieDetailsScreen(id: String, navController: NavHostController) {
-    val viewModel: MovieDetailsViewModel = hiltViewModel()
-    LaunchedEffect(Unit) {
-        viewModel.getMovieDetails(id)
+fun MovieDetailsScreen(
+    id: String,
+    navController: NavController,
+    movieDeatilsViewModel: MovieDetailsViewModel
+) {
+    LaunchedEffect(id) {
+        movieDeatilsViewModel.getMovieDetails(id)
     }
-    val movieDetails = viewModel.movieDetails.collectAsState()
+    val movieDetails = movieDeatilsViewModel.movieDetails.collectAsState()
     when (movieDetails.value) {
         is ApiState.Failure -> MovieError(movieDetails)
         is ApiState.Loading -> MovieLoading()
-        is ApiState.Success -> MovieDetails(movieDetails.value as ApiState.Success, navController)
+        is ApiState.Success -> {
+            MovieDetails(movieDetails.value as ApiState.Success, navController)
+           // Text(text = id)
+        }
     }
 
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostController) {
+fun MovieDetails(movieDetails: ApiState.Success, navController: NavController) {
     val movieData = movieDetails.data as MovieDetailsResponse
     val releaseDate = movieData.release_date.let {
         LocalDate.parse(

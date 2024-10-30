@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.banquemisrchallenge05.ui.theme.Banquemisrchallenge05Theme
 import com.example.banquemisrchallenge05.utils.NetworkObserver
+import com.example.banquemisrchallenge05.viewModel.MovieDetailsViewModel
+import com.example.banquemisrchallenge05.viewModel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,10 +19,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Banquemisrchallenge05Theme {
-                 networkObserver = NetworkObserver(applicationContext)
 
+                val movieDeatilsViewModel: MovieDetailsViewModel = hiltViewModel()
+                val movieViewModel : MoviesViewModel = hiltViewModel()
+                networkObserver = NetworkObserver(applicationContext)
                 networkObserver.startNetworkCallback()
-               MainScreen(networkObserver)
+               MainScreen(networkObserver,movieViewModel,movieDeatilsViewModel)
 
             }
         }

@@ -9,17 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.banquemisrchallenge05.viewModel.MoviesViewModel
 
 @SuppressLint("SuspiciousIndentation", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Popular(navController: NavHostController) {
-    val viewModel = hiltViewModel<MoviesViewModel>()
+fun Popular(navController: NavHostController, movieViewModel: MoviesViewModel) {
 
-    val popularMovies = viewModel.popularPager.collectAsLazyPagingItems()
+    val popularMovies = movieViewModel.popularPager.collectAsLazyPagingItems()
 
     Scaffold(
         topBar = {

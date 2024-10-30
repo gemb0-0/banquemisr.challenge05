@@ -90,7 +90,7 @@ val upcoming = listOf(
 
 val movieDetailsResponse = mutableListOf( MovieDetailsResponse(
     adult = false,
-    backdrop_path = "/path/to/backdrop.jpg",
+    backdrop_path = "/mpEbs71wwwkkIxiiEvH5XHTLnWv.jpg",
     belongs_to_collection = "null",
     budget = 200000000,
     genres = listOf(
@@ -108,8 +108,8 @@ val movieDetailsResponse = mutableListOf( MovieDetailsResponse(
     popularity = 85.5,
     poster_path = "/path/to/poster.jpg",
     production_companies = listOf(
-        ProductionCompany(id = 1, logo_path = "/path/to/logo1.png", name = "Epic Films", origin_country = "USA"),
-        ProductionCompany(id = 2, logo_path = "/path/to/logo2.png", name = "Adventure Studios", origin_country = "UK")
+        ProductionCompany(id = 1, logo_path = "/mpEbs71wwwkkIxiiEvH5XHTLnWv.jpg", name = "Epic Films", origin_country = "USA"),
+        ProductionCompany(id = 2, logo_path = "/mpEbs71wwwkkIxiiEvH5XHTLnWv.jpg", name = "Adventure Studios", origin_country = "UK")
     ),
     production_countries = listOf(
         ProductionCountry(iso_3166_1 = "US", name = "United States"),

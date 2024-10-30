@@ -30,12 +30,18 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisrchallenge05.ui.theme.red
 import com.example.banquemisrchallenge05.utils.NetworkObserver
+import com.example.banquemisrchallenge05.viewModel.MovieDetailsViewModel
+import com.example.banquemisrchallenge05.viewModel.MoviesViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 //@Preview(device = Devices.PIXEL_2_XL)
 @Composable
 
-fun MainScreen(networkObserver: NetworkObserver) {
+fun MainScreen(
+    networkObserver: NetworkObserver,
+    movieViewModel: MoviesViewModel,
+    movieDeatilsViewModel: MovieDetailsViewModel,
+) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -60,7 +66,7 @@ fun MainScreen(networkObserver: NetworkObserver) {
             }
         }
     ) {
-        NavigationHost(navController = navController)
+        NavigationHost(navController = navController, movieViewModel = movieViewModel, movieDeatilsViewModel = movieDeatilsViewModel)
 
         LaunchedEffect(networkObserver.isConnected.value) {
             if (!networkObserver.isConnected.value)

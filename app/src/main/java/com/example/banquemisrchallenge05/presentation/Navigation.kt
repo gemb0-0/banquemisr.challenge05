@@ -9,6 +9,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.banquemisrchallenge05.viewModel.MovieDetailsViewModel
+import com.example.banquemisrchallenge05.viewModel.MoviesViewModel
 
 
 sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: String) {
@@ -19,14 +21,21 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
 
 
 @Composable
-fun NavigationHost(navController: NavHostController){
+fun NavigationHost(
+    navController: NavHostController,
+    movieViewModel: MoviesViewModel,
+    movieDeatilsViewModel: MovieDetailsViewModel,
+
+    ){
+
+
     NavHost(navController = navController, startDestination = BottomNavItem.nowPlaying.route){
-    composable("nowPlaying"){ NowPlaying(navController) }
-    composable("popular"){ Popular(navController) }
-    composable("upComing"){ UpComing(navController) }
+    composable("nowPlaying"){ NowPlaying(navController,movieViewModel) }
+    composable("popular"){ Popular(navController,movieViewModel) }
+    composable("upComing"){ UpComing(navController,movieViewModel) }
    composable("movieDetails/{id}") {
         val id = it.arguments?.getString("id")
-        MovieDetailsScreen(id!!, navController)
+        MovieDetailsScreen(id!!, navController,movieDeatilsViewModel)
    }
     }
 }
