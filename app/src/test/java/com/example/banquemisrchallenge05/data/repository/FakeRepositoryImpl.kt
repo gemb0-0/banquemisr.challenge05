@@ -5,7 +5,7 @@ import com.example.banquemisrchallenge05.model.MovieDetailsResponse
 import com.example.banquemisrchallenge05.model.ProductionCompany
 import com.example.banquemisrchallenge05.model.ProductionCountry
 import com.example.banquemisrchallenge05.model.SpokenLanguage
-import com.example.banquemisrchallenge05.test.movieDetailsResponse
+import com.example.banquemisrchallenge05.utils.test.movieDetailsResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

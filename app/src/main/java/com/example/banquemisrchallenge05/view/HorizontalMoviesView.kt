@@ -51,15 +51,12 @@ fun HorizontalMoviesView(
         HorizontalPager(
             state = pagerState, beyondViewportPageCount = 3,
             contentPadding = PaddingValues(45.dp),
-
             )
         { page ->
             movieList[page]?.let {
-                Log.i("Popular", "MovieList: ${it}")
+                Log.i("Popular", "MovieList: $it")
                 val releaseDate = it.release_date.let {
-                    LocalDate.parse(
-                        it,
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
+                    LocalDate.parse(it, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
                     ).format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH))
                 }
 

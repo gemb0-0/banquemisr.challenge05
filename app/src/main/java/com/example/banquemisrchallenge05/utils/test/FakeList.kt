@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05.test
+package com.example.banquemisrchallenge05.utils.test
 
 import com.example.banquemisrchallenge05.model.Genre
 import com.example.banquemisrchallenge05.model.Movie

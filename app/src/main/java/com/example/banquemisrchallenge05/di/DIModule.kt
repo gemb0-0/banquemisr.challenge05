@@ -1,4 +1,4 @@
-package com.example.banquemisrchallenge05.utils
+package com.example.banquemisrchallenge05.di
 
 import android.app.Application
 import android.content.Context
@@ -16,6 +16,7 @@ import com.example.banquemisrchallenge05.data.repository.Repository
 import com.example.banquemisrchallenge05.data.repository.RepositoryImpl
 import com.example.banquemisrchallenge05.data.mediators.UpComingMediator
 import com.example.banquemisrchallenge05.model.MovieResponse
+import com.example.banquemisrchallenge05.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

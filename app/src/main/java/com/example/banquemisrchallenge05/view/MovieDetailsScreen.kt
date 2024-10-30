@@ -128,6 +128,7 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                 text = movieData.title,
                 fontWeight = FontWeight.Bold,
                 fontSize = 38.sp,
+                lineHeight = 40.sp,
                 modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)
             )
 
@@ -294,7 +295,6 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavHostControlle
                         Text(
                             text = it.name,
                             fontSize = 13.sp,
-
                             )
                     }
                 }

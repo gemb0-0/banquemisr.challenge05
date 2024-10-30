@@ -2,7 +2,7 @@ package com.example.banquemisrchallenge05.viewModel
 
 import com.example.banquemisrchallenge05.data.network.ApiState
 import com.example.banquemisrchallenge05.data.repository.FakeRepositoryImpl
-import com.example.banquemisrchallenge05.test.movieDetailsResponse
+import com.example.banquemisrchallenge05.utils.test.movieDetailsResponse
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.first
