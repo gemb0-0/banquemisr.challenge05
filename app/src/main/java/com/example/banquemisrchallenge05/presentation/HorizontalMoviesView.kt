@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
@@ -55,33 +56,14 @@ fun HorizontalMoviesView(
         { page ->
             movieList[page]?.let {
                 Log.i("Popular", "MovieList: $it")
-                val releaseDate = it.release_date.let {
-                    LocalDate.parse(it, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
-                    ).format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH))
-                }
-
 
                 Card(
                     modifier = Modifier.padding(10.dp),
                     colors = CardDefaults.cardColors(Color.Transparent),
                 ) {
-                    Text(
-                        text = it.title,
-                        fontSize = 27.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier
-                            .padding(start = 30.dp)
-                    )
+                    SetMovieTitle(it.title,0.dp,30.dp)
+                    SetReleaseDate(it.release_date,30.dp)
 
-                    Text(
-                        text = "Released $releaseDate",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Normal,
-                        fontStyle = FontStyle.Italic,
-                        color = Color.Gray,
-                        modifier = Modifier
-                            .padding(start = 35.dp)
-                    )
                     AsyncImage(
                         model = Constants.IMAGE_BASE_URL + it.poster_path,
                         contentDescription = it.title,
@@ -114,4 +96,33 @@ fun HorizontalMoviesView(
             }
         }
     }
+}
+
+@Composable
+fun SetReleaseDate(date: String,padding : Dp = 0.dp) {
+    val releaseDate = date.let {
+        LocalDate.parse(
+            it, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
+        ).format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH))
+    }
+    Text(
+        text = "Released $releaseDate",
+        fontSize = 13.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontStyle = FontStyle.Italic,
+        color = Color.Gray,
+        modifier = Modifier.padding(start = padding)
+    )
+}
+
+@Composable
+fun SetMovieTitle(title: String, vertical: Dp, horizontal: Dp) {
+    Text(
+        text = title,
+        fontSize = 30.sp,
+        lineHeight = 30.sp,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier
+            .padding(vertical = vertical, horizontal = horizontal)
+    )
 }
