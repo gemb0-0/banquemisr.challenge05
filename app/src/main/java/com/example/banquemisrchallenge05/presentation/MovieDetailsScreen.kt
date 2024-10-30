@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -49,11 +48,13 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.banquemisrchallenge05.R
+import com.example.banquemisrchallenge05.data.model.Genre
 import com.example.banquemisrchallenge05.data.network.ApiState
 import com.example.banquemisrchallenge05.data.model.MovieDetailsResponse
 import com.example.banquemisrchallenge05.ui.theme.TransparentRed
@@ -62,42 +63,31 @@ import com.example.banquemisrchallenge05.utils.Constants
 import com.example.banquemisrchallenge05.viewModel.MovieDetailsViewModel
 import com.smarttoolfactory.ratingbar.RatingBar
 import com.smarttoolfactory.ratingbar.model.Shimmer
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun MovieDetailsScreen(
     id: String,
     navController: NavController,
-    movieDeatilsViewModel: MovieDetailsViewModel
+    movieDetailsViewModel: MovieDetailsViewModel
 ) {
     LaunchedEffect(id) {
-        movieDeatilsViewModel.getMovieDetails(id)
+        movieDetailsViewModel.getMovieDetails(id)
     }
-    val movieDetails = movieDeatilsViewModel.movieDetails.collectAsState()
+    val movieDetails = movieDetailsViewModel.movieDetails.collectAsState()
     when (movieDetails.value) {
         is ApiState.Failure -> MovieError(movieDetails)
         is ApiState.Loading -> MovieLoading()
-        is ApiState.Success -> {
-            MovieDetails(movieDetails.value as ApiState.Success, navController)
-           // Text(text = id)
-        }
-    }
+        is ApiState.Success -> MovieDetails(movieDetails.value as ApiState.Success, navController)
 
+    }
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MovieDetails(movieDetails: ApiState.Success, navController: NavController) {
     val movieData = movieDetails.data as MovieDetailsResponse
-    val releaseDate = movieData.release_date.let {
-        LocalDate.parse(
-            it,
-            DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
-        ).format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH)).toString()
-    }
+
     Scaffold(
         modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars),
     ) {
@@ -107,35 +97,21 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavController) {
                 .verticalScroll(rememberScrollState())
         ) {
             Box {
-                AsyncImage(
-                    model = Constants.IMAGE_BASE_URL + movieData.poster_path,
-                    contentDescription = movieData.title,
-                    modifier = Modifier.fillMaxWidth(),
-                    contentScale = ContentScale.Crop
-                )
+                SetImg(movieData.poster_path, Modifier.fillMaxSize())
                 Button(
                     onClick = { navController.popBackStack() },
                     Modifier.padding(start = 10.dp, top = 10.dp),
                     contentPadding = PaddingValues(vertical = 4.dp, horizontal = 5.dp),
                     colors = ButtonDefaults.buttonColors(TransparentRed)
                 ) {
-
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = null,
                     )
                 }
-
             }
 
-
-            Text(
-                text = movieData.title,
-                fontWeight = FontWeight.Bold,
-                fontSize = 38.sp,
-                lineHeight = 40.sp,
-                modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)
-            )
+            SetMovieTitle(movieData.title, 5.dp, 10.dp)
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -143,13 +119,9 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavController) {
                     .padding(start = 10.dp, end = 15.dp)
                     .fillMaxSize(),
             ) {
-                Text(
-                    text = "Released $releaseDate",
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    fontStyle = FontStyle.Italic,
-                    color = Color.Gray,
-                )
+
+                SetReleaseDate(movieData.release_date)
+
                 Spacer(modifier = Modifier.weight(1f))
 
                 RatingBar(
@@ -175,111 +147,34 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavController) {
                 )
             }
 
-            Text("Genres:",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(start = 10.dp, top = 5.dp)
-            )
+            SetText("Genres:", 25.sp)
 
 
-               Row(modifier = Modifier.padding(start = 7.dp, end = 7.dp)) {
-                     movieData.genres.forEach {
-                         Card (modifier = Modifier.padding(horizontal = 5.dp),
-                             colors = CardDefaults.cardColors(grey)
-                             ) {
-                             Text(
-                                 text = it.name,
-                                 fontSize = 14.sp,
-                                    modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 2.dp, bottom = 2.dp)
-                             )
-                         }
-                     }
-               }
+            SetGenres(movieData.genres)
 
-            Text(
-                text = "Overview",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)
-            )
+            SetText("Overview:", 25.sp)
             Text(
                 text = movieData.overview,
                 fontSize = 17.sp,
                 modifier = Modifier.padding(horizontal = 10.dp)
             )
-            Text(
-                text = "Additional Info",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
-            )
+            SetText("Additional Info:", 25.sp)
 
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(style = SpanStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)) {
-                        append("Runtime:")
-                    }
-                    withStyle(style = SpanStyle(fontSize = 16.sp, fontStyle = FontStyle.Italic)) {
-                        append("${movieData.runtime} minutes")
-                    }
-                },
-                modifier = Modifier.padding(start = 10.dp, top = 5.dp)
-            )
+            SetAnnotatedStrings(movieData.runtime.toString(), "Runtime:", Modifier.padding(start = 10.dp))
+
             Row(
                 modifier = Modifier
                     .padding(start = 10.dp, top = 5.dp, end = 20.dp)
                     .fillMaxSize(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 18.sp, fontWeight = FontWeight.Bold
-                            )
-                        ) {
-                            append("Budget: ")
-                        }
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 16.sp,
-                                fontStyle = FontStyle.Italic
-                            )
-                        ) {
-                            append(if(movieData.budget>0)"${"%,d".format(movieData.budget)}$" else "Unavailable Info")
-                        }
-                    },
-                )
+                SetAnnotatedStrings(movieData.budget.toString(), "Budget:")
 
-                Text(
-                    text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        ) {
-                            append("Revenue: ")
-                        }
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = 16.sp,
-                                fontStyle = FontStyle.Italic
-                            )
-                        ) {
-                            append(if(movieData.revenue>0)"${"%,d".format(movieData.revenue)}$" else "Unavailable Info")
-                        }
-                    },
-                )
+                SetAnnotatedStrings(movieData.revenue.toString(), "Revenue:")
 
             }
 
-            Text(
-                "Production Companies:",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(start = 10.dp, top = 5.dp)
-            )
+            SetText("Production Companies:")
 
             Row(
                 modifier = Modifier
@@ -291,21 +186,87 @@ fun MovieDetails(movieDetails: ApiState.Success, navController: NavController) {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(start = 10.dp, top = 5.dp)
                     ) {
-                        AsyncImage(
-                            model = Constants.IMAGE_BASE_URL + it.logo_path,
-                            contentDescription = it.name,
-                            modifier = Modifier.size(50.dp),
-                            contentScale = ContentScale.Fit
-                        )
-                        Text(
-                            text = it.name,
-                            fontSize = 13.sp,
-                            )
+                        SetImg(it.logo_path, Modifier.size(35.dp))
+                        SetText(it.name, 11.sp)
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+private fun SetGenres(Genre: List<Genre>) {
+    Row(modifier = Modifier.padding(start = 7.dp, end = 7.dp)) {
+        Genre.forEach {
+            Card(
+                modifier = Modifier.padding(horizontal = 5.dp),
+                colors = CardDefaults.cardColors(grey)
+            ) {
+                Text(
+                    text = it.name,
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(
+                        start = 10.dp,
+                        end = 10.dp,
+                        top = 2.dp,
+                        bottom = 2.dp
+                    )
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SetAnnotatedStrings(movieData: String, title: String, modifier: Modifier = Modifier.padding(start = 0.dp)) {
+    Text(
+        modifier = modifier,
+        text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    fontSize = 18.sp, fontWeight = FontWeight.Bold
+                )
+            ) {
+                append(title)
+            }
+            withStyle(
+                style = SpanStyle(
+                    fontSize = 16.sp,
+                    fontStyle = FontStyle.Italic,
+
+                )
+            ) {
+                append(
+                    when {
+                        title == "Runtime:" -> "$movieData minutes"
+                        movieData.toInt() > 0 -> "${"%,d".format(movieData.toInt())}$"
+                        else -> "Unavailable Info"
+                    }
+                )
+            }
+        },
+    )
+}
+
+@Composable
+private fun SetText(txt: String, fontSize: TextUnit = 18.sp) {
+    Text(
+        text = txt,
+        fontSize = fontSize,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.padding(start = 10.dp, top = 5.dp)
+    )
+}
+
+@Composable
+fun SetImg(endPoint: String?, modifier: Modifier = Modifier) {
+    AsyncImage(
+        model = Constants.IMAGE_BASE_URL + endPoint,
+        contentDescription = endPoint,
+        modifier = modifier,
+        contentScale = ContentScale.Crop
+    )
 }
 
 
